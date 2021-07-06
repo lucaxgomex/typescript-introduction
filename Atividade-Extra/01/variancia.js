@@ -11,15 +11,13 @@ var VariacaoCovid = /** @class */ (function () {
     };
     VariacaoCovid.prototype.classificacao = function () {
         var valor = this.calculaVariacao();
-        if (valor < 0.15) {
+        if (valor > 0 && valor < 0.15) {
             return "Em Estabilidade";
         }
-        else if (valor == 0.15) {
+        else if (valor == 0) {
             return "Em Queda";
         }
-        else {
-            return "Em Alta";
-        }
+        return "Em Alta";
     };
     return VariacaoCovid;
 }());
