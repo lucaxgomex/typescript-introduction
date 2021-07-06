@@ -7,12 +7,18 @@ var Comissao = /** @class */ (function () {
         this.vendas = vendas;
     }
     Comissao.prototype.valorComissao = function () {
-        if (this.vendas >= 5000 && this.vendas < 10000) {
+        var retorno1 = 5000 * 0.05;
+        var retorno2 = 2000 * 0.1;
+        if (this.vendas > 5000 && this.vendas < 10000) {
             return (this.vendas - 5000) * 0.05;
         }
-        else if (this.vendas) {
-            return this.vendas * 0.2;
+        else if (this.vendas >= 10000 && this.vendas < 30000) {
+            return retorno1 + (this.vendas - 10000) * 0.1;
         }
+        else if (this.vendas >= 30000) {
+            return retorno1 + retorno2 + (this.vendas - 30000) * 0.2;
+        }
+        return 0;
     };
     Comissao.prototype.mostraSalario = function () {
         console.log("Valor ganho: R$ " + (1100 + this.valorComissao()));
