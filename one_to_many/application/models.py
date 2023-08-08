@@ -12,12 +12,20 @@ class Endereco(models.Model):
   def __str__(self):
     return self.rua
 
+class Pessoa(models.Model):
+  nome = models.CharField(max_length=100, null=False, blank=False)
+  data_nascimento = models.DateField(null=False, blank=False)
+  email = models.EmailField(null=False, blank=False)
+  
+  class Meta:
+    abstract = True
+
 # Entregador 
-class Entregador(models.Model):
-  SEXO_CHOICES = (
-    ("F", "Feminino"),
-    ("M", "Masculino"),
-    ("N", "Nenhuma das opções")
+class Entregador(Pessoa):
+  TURNO_CHOICES = (
+    ("M", "Manha"),
+    ("T", "Tarde"),
+    ("N", "Noite")
   )
 
   """
@@ -27,28 +35,22 @@ class Entregador(models.Model):
     related_name='pedidos'
   )
   """
-
-  nome = models.CharField(max_length=100, null=False, blank=False)
-  data_nascimento = models.DateField(null=False, blank=False)
-  email = models.EmailField(null=False, blank=False)
-  profissao = models.CharField(max_length=50, null=False, blank=False)
-  sexo = models.CharField(max_length=1, choices=SEXO_CHOICES, blank=False, null=False)
+  # alterar coluna
+  # sexo -> turno
+  turno = models.CharField(max_length=1, choices=TURNO_CHOICES, blank=False, null=False)
   cpf = models.IntegerField(null=False, blank=False)
   
   def __str__(self):
     return self.nome
     
 # Cliente
-class Cliente(models.Model):
+class Cliente(Pessoa):
   SEXO_CHOICES = (
     ("F", "Feminino"),
     ("M", "Masculino"),
     ("N", "Nenhuma das opções")
   )
 
-  nome = models.CharField(max_length=100, null=False, blank=False)
-  data_nascimento = models.DateField(null=False, blank=False)
-  email = models.EmailField(null=False, blank=False)
   profissao = models.CharField(max_length=50, null=False, blank=False)
   sexo = models.CharField(max_length=1, choices=SEXO_CHOICES, blank=False, null=False)
   endereco = models.OneToOneField(
