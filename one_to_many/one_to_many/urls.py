@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from application.views import DadosCliente, DadosEntregador
 
 """
 from django.contrib import admin
@@ -28,6 +29,8 @@ urlpatterns = [
 """
 
 urlpatterns = [
-    path('application/', include('application.urls')),
+    #path('', include('application.urls')),
     path('admin/', admin.site.urls),
+    path('', DadosCliente.home, name='home'),
+    path('entregador/', DadosEntregador.home, name='entregador'),
 ]

@@ -20,10 +20,13 @@ class Pessoa(models.Model):
   class Meta:
     abstract = True
 
+class Escolha():
+  pass
+
 # Entregador 
 class Entregador(Pessoa):
   TURNO_CHOICES = (
-    ("M", "Manha"),
+    ("M", "Manhã"),
     ("T", "Tarde"),
     ("N", "Noite")
   )
